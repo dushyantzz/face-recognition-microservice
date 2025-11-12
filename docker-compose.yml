@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  face-recognition-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: face-recognition-service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+    environment:
+      - DATABASE_URL=sqlite:///./data/frs_database.db
+      - USE_ONNX=true
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+      - DETECTION_CONFIDENCE_THRESHOLD=0.8
+      - RECOGNITION_SIMILARITY_THRESHOLD=0.6
+      - MIN_FACE_SIZE=40
+      - TOP_K_MATCHES=5
+    restart: unless-stopped
+    networks:
+      - frs-network
+
+  # Development service (optional)
+  face-recognition-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: face-recognition-dev
+    ports:
+      - "8001:8000"
+    volumes:
+      - .:/app
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+    environment:
+      - DATABASE_URL=sqlite:///./data/frs_database_dev.db
+      - USE_ONNX=true
+      - DEBUG=true
+      - LOG_LEVEL=DEBUG
+    profiles:
+      - dev
+    networks:
+      - frs-network
+
+networks:
+  frs-network:
+    driver: bridge
+
+volumes:
+  data:
+  models:
+  logs:
