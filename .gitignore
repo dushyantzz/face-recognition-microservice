@@ -1,0 +1,82 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environment
+.env
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Data & Models
+data/raw/wider_face/**
+data/raw/vggface2/**
+data/raw/ms_celeb/**
+data/processed/**
+models/detection/*.pth
+models/embeddings/*.ckpt
+models/embeddings/*.pth
+models/onnx/*.onnx
+*.h5
+*.pb
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Docker
+.dockerignore
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep structure
+!data/raw/wider_face/.gitkeep
+!data/raw/vggface2/.gitkeep
+!data/raw/gallery/.gitkeep
+!data/processed/aligned/.gitkeep
+!data/processed/embeddings/.gitkeep
+!models/detection/.gitkeep
+!models/embeddings/.gitkeep
+!models/onnx/.gitkeep
